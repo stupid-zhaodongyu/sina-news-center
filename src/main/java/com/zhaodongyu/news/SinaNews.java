@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -16,16 +17,16 @@ public class SinaNews {
     private static String url
             = "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2509&k=&num=50&page=1&r=0.19278015324177455";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParseException {
         String content = HttpUtls.getHttpContent(url);
         JSONObject jsonObject = JSON.parseObject(content).getJSONObject("result");
         JSONArray jsonArray = jsonObject
             .getJSONArray("data");
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dateString = sdf.format(new Date(jsonObject.get("timestamp").toString()));
 
-        System.out.println(dateString+ "dddddd");;
+        Long timeLong = Long.parseLong(jsonObject.get("start").toString())*1000L;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = sdf.format(timeLong);
 
         List<SinaNewsPojo> sinaNewsList = JSON.parseArray(jsonArray.toString(), SinaNewsPojo.class);
         for (SinaNewsPojo sinaNewsPojo : sinaNewsList) {
