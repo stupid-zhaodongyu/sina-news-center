@@ -25,15 +25,13 @@ public class SinaNews {
             .getJSONArray("data");
 
         TimeZone time = TimeZone.getTimeZone("Etc/GMT-8");  //转换为中国时区
-
         TimeZone.setDefault(time);
 
-        System.out.println("toString is ----------" + jsonObject.get("start").toString());
         Long timeLong = Long.parseLong(jsonObject.get("start").toString())*1000L;
-        System.out.println("Long is ------------" + timeLong);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dateString = sdf.parse(sdf.format(timeLong)).toString();
-        System.out.println("dateString is -----------" + dateString);
+        String dateString = sdf.format(timeLong);
+
+
         List<SinaNewsPojo> sinaNewsList = JSON.parseArray(jsonArray.toString(), SinaNewsPojo.class);
         for (SinaNewsPojo sinaNewsPojo : sinaNewsList) {
             sinaNewsPojo.setUpdatetime(dateString);
