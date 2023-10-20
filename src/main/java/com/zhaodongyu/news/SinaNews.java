@@ -25,7 +25,7 @@ public class SinaNews {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateString = sdf.format(new Date(jsonObject.get("timestamp").toString()));
 
-        System.out.println(dateString);;
+        System.out.println(dateString+ "dddddd");;
 
         List<SinaNewsPojo> sinaNewsList = JSON.parseArray(jsonArray.toString(), SinaNewsPojo.class);
         for (SinaNewsPojo sinaNewsPojo : sinaNewsList) {
