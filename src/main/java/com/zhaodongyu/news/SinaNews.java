@@ -33,12 +33,12 @@ public class SinaNews {
 
 
         List<SinaNewsPojo> sinaNewsList = JSON.parseArray(jsonArray.toString(), SinaNewsPojo.class);
-        for (SinaNewsPojo sinaNewsPojo : sinaNewsList) {
-            sinaNewsPojo.setUpdatetime(dateString);
-        }
+//        for (SinaNewsPojo sinaNewsPojo : sinaNewsList) {
+//            sinaNewsPojo.setUpdatetime(dateString);
+//        }
         String sinaNews = sinaNewsList.stream().map(SinaNewsPojo::toString).collect(Collectors.joining());
         String sinaHtml = new String(Files.readAllBytes(Paths.get("sina.html")), "utf-8");
-        sinaHtml = sinaHtml.replace("${content}", sinaNews);
+        sinaHtml = sinaHtml.replace("${content}", sinaNews).replace("${time}",dateString);
 
         Path indexPath = Paths.get("index.html");
         Files.deleteIfExists(indexPath);
