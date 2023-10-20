@@ -43,7 +43,7 @@
             <descriptorRef>jar-with-dependencies</descriptorRef>
           </descriptorRefs>
           <!--工程名-->
-          <finalName>${project.name}</finalName>
+          <finalName>sina-news-center</finalName>
         </configuration>
         <executions>
           <execution>
