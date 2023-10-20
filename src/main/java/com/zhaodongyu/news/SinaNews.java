@@ -27,7 +27,7 @@ public class SinaNews {
         Long timeLong = Long.parseLong(jsonObject.get("start").toString())*1000L;
         System.out.println("Long is ------------" + timeLong);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dateString = sdf.format(timeLong);
+        String dateString = sdf.parse(sdf.format(timeLong)).toString();
         System.out.println("dateString is -----------" + dateString);
         List<SinaNewsPojo> sinaNewsList = JSON.parseArray(jsonArray.toString(), SinaNewsPojo.class);
         for (SinaNewsPojo sinaNewsPojo : sinaNewsList) {
