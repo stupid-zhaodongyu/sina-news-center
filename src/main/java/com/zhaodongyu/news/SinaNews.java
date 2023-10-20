@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.stream.Collectors;
 public class SinaNews {
     private static String url
@@ -22,6 +23,10 @@ public class SinaNews {
         JSONObject jsonObject = JSON.parseObject(content).getJSONObject("result");
         JSONArray jsonArray = jsonObject
             .getJSONArray("data");
+
+        TimeZone time = TimeZone.getTimeZone("Etc/GMT-8");  //转换为中国时区
+
+        TimeZone.setDefault(time);
 
         System.out.println("toString is ----------" + jsonObject.get("start").toString());
         Long timeLong = Long.parseLong(jsonObject.get("start").toString())*1000L;
